@@ -1,0 +1,50 @@
+{% extends "Admin_baseRef.html.twig" %}
+
+
+
+{% block content %}
+
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-block">
+                <h2 align="center" style="color: lightgreen;">{{ sujet.titresujet }}</h2>
+
+                <img   style="width: 300px;height: 250px"  src="{{sujet.displayPhoto2 }}"   >
+                <p >  <b>Contenu : </b>  {{ sujet.contenu  }}</p>
+                <br/>
+                <div class="card-title-block">
+                    <h3 class="title"> Les Reponses  </h3>
+                </div>
+
+                <section class="example">
+                    <table class="table table-inverse">
+                        <thead>
+                        <tr>
+                            <th>Reponse</th>
+                            <th>Utilisateur</th>
+                            <th>image</th>
+                            <th>delete</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for reponse in reponses %}
+                            <tr>
+                                <td>{{ reponse.contenu }}</td>
+                                <td>{{ reponse.user.username }}</td>
+                                <td><img height="100px" width="120px" src="{{app.user.displayPhoto }}"   >
+                                </td>
+                                <td>
+                                    <a href="{{ path('deletecom',{id:reponse.idreponserc,idsujet:sujet.idsujetrc}) }}"> <button class="btn btn-danger"> supprimer</button></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </section>
+
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

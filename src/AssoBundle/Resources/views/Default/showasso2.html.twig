@@ -1,0 +1,206 @@
+
+{% extends "homeasso.html.twig" %}
+{% block content %}
+
+
+    <div class="single-page about-page" style="background: url({{ asset('images/portfolio-bg.jpg') }})  ;"  >
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h1>.</h1>
+                </div><!-- .col -->
+            </div><!-- .row -->
+        </div><!-- .container -->
+    </div><!-- .page-header -->
+
+
+
+    <form class="container">
+        <div class="form-row justify-content-center">
+            <div class="form-group col-md-3">
+                <div class="input-group mx-auto mb-12">
+
+<span></span>
+                    <br>
+                   Search with Username
+
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <form class="container">
+    <div class="form-row justify-content-center">
+        <div class="form-group col-md-3">
+            <div class="input-group mx-auto mb-12">
+
+
+                <input type="text" id="search" class="form-control" placeholder="search .. " style="text-align:center">
+
+            </div>
+        </div>
+    </div>
+    </form>
+
+
+
+
+    <form class="container">
+        <div class="form-row justify-content-center">
+            <div class="form-group col-md-3">
+                <div class="input-group mx-auto mb-12">
+
+
+                    <ul class="nav" id="side-menu">
+                        <li>
+                            <a href="#"> Check profil <span class="fa arrow"></span></a><br>
+                            <ul class="nav nav-second-level" id="entitiesNav">
+                            </ul>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+    jQuery(document).ready(function() {
+        var searchRequest = null;
+        $("#search").keyup(function() {
+            var minlength = 1;
+            var that = this;
+            var value = $(this).val();
+            var entitySelector = $("#entitiesNav").html('');
+            if (value.length >= minlength ) {
+                if (searchRequest != null)
+                    searchRequest.abort();
+                searchRequest = $.ajax({
+                    type: "GET",
+                    url: "{{ path('ajax_searchUsers_fam') }}",
+                    data: {
+                        'q' : value
+                    },
+                    dataType: "text",
+                    success: function(msg){
+                        //we need to check if the value is the same
+                        if (value==$(that).val()) {
+                            var result = JSON.parse(msg);
+                            $.each(result, function(key, arr) {
+                                $.each(arr, function(id, value) {
+                                    if (key == 'entities') {
+                                        if (id != 'error') {
+
+                                            entitySelector.append('<li><a href="http://localhost/pi_dev/web/app_dev.php/Asso/showprofile/'+id+'">'+value+'</a></li>');
+                                        } else {
+                                            entitySelector.append('<li class="errorLi">'+value+'</li>');
+                                        }
+                                    }
+                                });
+                            });
+                        }
+                    }
+                });
+            }
+        });
+    });
+</script>
+
+
+
+    <div class="portfolio-wrap">
+        <div class="container">
+            <div class="row portfolio-container">
+                <div>
+                    <div class="card-body pb-0">
+                        <div class="row d-flex align-items-stretch">
+                            {% for i in users %}
+
+                                <div  class="col-12 col-md-6 col-lg-4 portfolio-item">
+                                    <div >
+                                        <div >
+
+                                        </div>
+                                        <div>
+                                            <div class="row">
+                                                <div >
+                                                    <p class="text-muted text-sm"><b>Username: </b> {{ i.username }} </p>
+                                                    <p class="text-muted text-sm"><b>Adresse Email: </b> {{ i.email }} </p>
+
+
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div >
+                                            <div class="text-right">
+
+                                                <a href="{{ path('profile_user_fam', { 'username': i.username }) }}"   class="btn gradient-bg btn-primary ">
+                                                    <i  class="fas fa-user"></i> View Profile
+                                                </a>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <span></span>
+                                <br>
+
+                                <br>
+                            {% endfor %}
+                            <span></span>
+                            <span></span>
+                            <br>
+                            <br>
+                        </div>
+                        <br>
+                        <br>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+<div class="navigation">
+    {{ knp_pagination_render(users) }}
+
+</div>
+
+
+    <div class="help-us">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 d-flex flex-wrap justify-content-between align-items-center">
+                    <h2>Help us so we can help others</h2>
+
+                    <a class="btn orange-border" href="#">Donate now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- /.card-body -->
+
+
+    <!-- jQuery -->
+    <script src="{{ asset('Admin/plugins/jquery/jquery.min.js') }}"></script>
+    <!-- Bootstrap 4 -->
+    <script src="{{ asset('Admin/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <!-- AdminLTE App -->
+    <script src="{{ asset('Admin/dist/js/adminlte.min.js') }}"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="{{ asset('Admin/dist/js/demo.js') }}"></script>
+</body>
+
+</html>
+{% endblock %}

@@ -1,0 +1,616 @@
+
+{% extends 'homeasso.html.twig' %}
+
+{% block content %}
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+
+    </div>
+    <div class="page-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h1>Contact</h1>
+                </div><!-- .col -->
+            </div><!-- .row -->
+        </div><!-- .container -->
+    </div><!-- .page-header -->
+
+    <div class="contact-page-wrap">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-5">
+                    <div class="entry-content">
+                        <h2>Get In touch with us</h2>
+
+                        <p></p>
+                        <ul class="contact-social d-flex flex-wrap align-items-center">
+                            <li><a href="#"><i class="fa fa-pinterest-p"></i></a></li>
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                            <li><a href="#"><i class="fa fa-behance"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        </ul>
+
+                        <ul class="contact-info p-0">
+                            <li><i class="fa fa-phone"></i><span>+216 24 933 784</span></li>
+                            <li><i class="fa fa-envelope"></i><span>Solidarity.refugee@gmail.com</span></li>
+                            <li><i class="fa fa-map-marker"></i><span>Z.I. Chotrana II B.P. 160,Pôle Technologique El Ghazela - Ariana 2083
+                            </span>  </ul>
+                    </div>
+                </div><!-- .col -->
+
+                <div class="col-md-8 col-xl-6 chat">
+                    <div class="card">
+                        <div class="card-header msg_head">
+                            <div class="d-flex bd-highlight">
+                                <div class="img_cont">
+                                    <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img">
+                                    <span class="online_icon"></span>
+                                </div>
+                                <div class="user_info">
+                                    <span>Chat with Khalid</span>
+                                    <p>1767 Messages</p>
+                                </div>
+                                <div class="video_cam">
+                                    <span><i class="fas fa-video"></i></span>
+                                    <span><i class="fas fa-phone"></i></span>
+                                </div>
+                            </div>
+                            <span id="action_menu_btn"><i class="fas fa-ellipsis-v"></i></span>
+                            <div class="action_menu">
+                                <ul>
+                                    <li><i class="fas fa-user-circle"></i> View profile</li>
+                                    <li><i class="fas fa-users"></i> Add to close friends</li>
+                                    <li><i class="fas fa-plus"></i> Add to group</li>
+                                    <li><i class="fas fa-ban"></i> Block</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card-body msg_card_body">
+
+                            <li>
+                                <ul id="entitiesNav"></ul>
+
+                            </li>
+
+                        </div>
+                        <div class="card-footer">
+                            <div class="input-group">
+                                <div >
+
+
+                                    <input type="text" name="chat" class="form-control type_msg" id="chatbox" placeholder="Hi there! Type here to talk to me." onfocus="placeHolder()">
+
+                                </div>
+
+
+                            </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+        <script type="text/javascript">
+            jQuery(document).ready(function() {
+                var searchRequest = null;
+                $("#chatbox").keyup(function() {
+                    var minlength = 1;
+                    var that = this;
+                    var value = $(this).val();
+                    var entitySelector = $("#entitiesNav").html('');
+                    if (value.length >= minlength ) {
+                        if (searchRequest != null)
+                           searchRequest.abort();
+                        searchRequest = $.ajax({
+                            type: "GET",
+                            url: "{{ path('chat_msg') }}",
+                            data: {
+                                'q' : value
+                            },
+                            dataType: "text",
+                            success: function(msg){
+                                //we need to check if the value is the same
+                                if (value==$(that).val()) {
+                                    var result = JSON.parse(msg);
+                                    $.each(result, function(key, arr) {
+                                        $.each(arr, function(id, value) {
+                                            if (key == 'entities') {
+                                                if (id != 'error') {
+
+                                                    entitySelector.append('<li><a href="http://localhost/pi_dev/web/app_dev.php/showprofile/'+id+'">'+value+'</a></li>');
+                                                } else {
+                                                    entitySelector.append('<li class="errorLi">'+value+'</li>');
+                                                }
+                                            }
+                                        });
+                                    });
+                                }
+                            }
+                        });
+                    }
+                });
+            });
+        </script>
+
+
+
+
+                </div><!-- .col -->
+
+                <div class="col-12">
+                    <div class="contact-gmap">
+                    </div>
+                </div>
+            </div><!-- .row -->
+        </div><!-- .container -->
+    </div>
+
+
+    <script type="text/javascript" >
+
+    //links
+    //http://eloquentjavascript.net/09_regexp.html
+    //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+
+
+    var messages = [], //array that hold the record of each string in chat
+    lastUserMessage = "", //keeps track of the most recent input string from the user
+    botMessage = "", //var keeps track of what the chatbot is going to say
+    botName = 'Admin', //name of the chatbot
+    username = '{{app.user.username}}'
+        talking = true; //when false the speach function doesn't work
+    //
+    //
+    //****************************************************************
+    //****************************************************************
+    //****************************************************************
+    //****************************************************************
+    //****************************************************************
+    //****************************************************************
+    //****************************************************************
+    //edit this function to change what the chatbot says
+    function chatbotResponse() {
+    talking = true;
+    botMessage = "I'm confused"; //the default message
+
+    if (lastUserMessage === 'hi' || lastUserMessage =='hello') {
+    const hi = ['hi','howdy','hello']
+    botMessage = hi[Math.floor(Math.random()*(hi.length))];;
+    }
+
+    if (lastUserMessage === 'name') {
+    botMessage = 'My name is ' + '{{app.user.username}}';
+    //    botMessage = 'bara makhyebek w makhyeb rasik !!! hahahahahahaha ';
+
+    }
+    }
+    //****************************************************************
+    //****************************************************************
+    //****************************************************************
+    //****************************************************************
+    //****************************************************************
+    //****************************************************************
+    //****************************************************************
+    //
+    //
+    //
+    //this runs each time enter is pressed.
+    //It controls the overall input and output
+    function newEntry() {
+    //if the message from the user isn't empty then run
+    if (document.getElementById("chatbox").value != "") {
+    //pulls the value from the chatbox ands sets it to lastUserMessage
+    lastUserMessage = document.getElementById("chatbox").value;
+    //sets the chat box to be clear
+    document.getElementById("chatbox").value = "";
+    //adds the value of the chatbox to the array messages
+    messages.push( "<b>" + username + ":</b> " +lastUserMessage);
+    //Speech(lastUserMessage);  //says what the user typed outloud
+    //sets the variable botMessage in response to lastUserMessage
+    chatbotResponse();
+    //add the chatbot's name and message to the array messages
+    messages.push("<b>" + botName + ":</b> " + botMessage);
+    // says the message using the text to speech function written below
+    Speech(botMessage);
+    //outputs the last few array elements of messages to html
+    for (var i = 1; i < 100; i++) {
+    if (messages[messages.length - i])
+    document.getElementById("chatlog" + i).innerHTML = messages[messages.length - i];
+    }
+    }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //text to Speech
+    //https://developers.google.com/web/updates/2014/01/Web-apps-that-talk-Introduction-to-the-Speech-Synthesis-API
+    function Speech(say) {
+    if ('speechSynthesis' in window && talking) {
+    var utterance = new SpeechSynthesisUtterance(say);
+    //msg.voice = voices[10]; // Note: some voices don't support altering params
+    //msg.voiceURI = 'native';
+    //utterance.volume = 1; // 0 to 1
+    //utterance.rate = 0.1; // 0.1 to 10
+    //utterance.pitch = 1; //0 to 2
+    //utterance.text = 'Hello World';
+    //utterance.lang = 'en-US';
+    speechSynthesis.speak(utterance);
+    }
+    }
+
+    //runs the keypress() function when a key is pressed
+    document.onkeypress = keyPress;
+    //if the key pressed is 'enter' runs the function newEntry()
+    function keyPress(e) {
+    var x = e || window.event;
+    var key = (x.keyCode || x.which);
+    if (key == 13 || key == 3) {
+    //runs this function when enter is pressed
+    newEntry();
+    }
+    if (key == 38) {
+    console.log('hi')
+    //document.getElementById("chatbox").value = lastUserMessage;
+    }
+    }
+
+    //clears the placeholder text ion the chatbox
+    //this function is set to run when the users brings focus to the chatbox, by clicking on it
+    function placeHolder() {
+    document.getElementById("chatbox").placeholder = "";
+    }
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+    <style class="cp-pen-styles">
+
+
+        body {
+            font: 15px arial, sans-serif;
+            background-color: #d9d9d9;
+            padding-top: 15px;
+            padding-bottom: 15px;
+        }
+
+        #bodybox {
+            margin: auto;
+            max-width: 550px;
+            font: 15px arial, sans-serif;
+            background-color: white;
+            border-style: solid;
+            border-width: 1px;
+            padding-top: 20px;
+            padding-bottom: 25px;
+            padding-right: 25px;
+            padding-left: 25px;
+            box-shadow: 5px 5px 5px grey;
+            border-radius: 15px;
+        }
+
+        #chatborder {
+            border-style: solid;
+            background-color: #f6f9f6;
+            border-width: 3px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            margin-left: 20px;
+            margin-right: 20px;
+            padding-top: 10px;
+            padding-bottom: 15px;
+            padding-right: 20px;
+            padding-left: 15px;
+            border-radius: 15px;
+        }
+
+        .chatlog {
+            font: 15px arial, sans-serif;
+        }
+
+        #chatbox {
+            font: 17px arial, sans-serif;
+            height: 22px;
+            width: 100%;
+        }
+
+        h1 {
+            margin: auto;
+        }
+
+        pre {
+            background-color: #f0f0f0;
+            margin-left: 20px;
+        }
+    </style>
+
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.js"></script>
+    <style class="cp-pen-styles">
+        body,html{
+            height: 100%;
+            margin: 0;
+            background: #7F7FD5;
+            background: -webkit-linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);
+            background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);
+        }
+
+        .chat{
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+        .card{
+            height: 500px;
+            border-radius: 15px !important;
+            background-color: rgba(0,0,0,0.4) !important;
+        }
+        .contacts_body{
+            padding:  0.75rem 0 !important;
+            overflow-y: auto;
+            white-space: nowrap;
+        }
+        .msg_card_body{
+            overflow-y: auto;
+        }
+        .card-header{
+            border-radius: 15px 15px 0 0 !important;
+            border-bottom: 0 !important;
+        }
+        .card-footer{
+            border-radius: 0 0 15px 15px !important;
+            border-top: 0 !important;
+        }
+        .container{
+            align-content: center;
+        }
+        .search{
+            border-radius: 15px 0 0 15px !important;
+            background-color: rgba(0,0,0,0.3) !important;
+            border:0 !important;
+            color:white !important;
+        }
+        .search:focus{
+            box-shadow:none !important;
+            outline:0px !important;
+        }
+        .type_msg{
+            background-color: rgba(0,0,0,0.3) !important;
+            border:0 !important;
+            color:white !important;
+            height: 60px !important;
+            overflow-y: auto;
+        }
+        .type_msg:focus{
+            box-shadow:none !important;
+            outline:0px !important;
+        }
+        .attach_btn{
+            border-radius: 15px 0 0 15px !important;
+            background-color: rgba(0,0,0,0.3) !important;
+            border:0 !important;
+            color: white !important;
+            cursor: pointer;
+        }
+        .send_btn{
+            border-radius: 0 15px 15px 0 !important;
+            background-color: rgba(0,0,0,0.3) !important;
+            border:0 !important;
+            color: white !important;
+            cursor: pointer;
+        }
+        .search_btn{
+            border-radius: 0 15px 15px 0 !important;
+            background-color: rgba(0,0,0,0.3) !important;
+            border:0 !important;
+            color: white !important;
+            cursor: pointer;
+        }
+        .contacts{
+            list-style: none;
+            padding: 0;
+        }
+        .contacts li{
+            width: 100% !important;
+            padding: 5px 10px;
+            margin-bottom: 15px !important;
+        }
+        .active{
+            background-color: rgba(0,0,0,0.3);
+        }
+        .user_img{
+            height: 70px;
+            width: 70px;
+            border:1.5px solid #f5f6fa;
+
+        }
+        .user_img_msg{
+            height: 40px;
+            width: 40px;
+            border:1.5px solid #f5f6fa;
+
+        }
+        .img_cont{
+            position: relative;
+            height: 70px;
+            width: 70px;
+        }
+        .img_cont_msg{
+            height: 40px;
+            width: 40px;
+        }
+        .online_icon{
+            position: absolute;
+            height: 15px;
+            width:15px;
+            background-color: #4cd137;
+            border-radius: 50%;
+            bottom: 0.2em;
+            right: 0.4em;
+            border:1.5px solid white;
+        }
+        .offline{
+            background-color: #c23616 !important;
+        }
+        .user_info{
+            margin-top: auto;
+            margin-bottom: auto;
+            margin-left: 15px;
+        }
+        .user_info span{
+            font-size: 20px;
+            color: white;
+        }
+        .user_info p{
+            font-size: 10px;
+            color: rgba(255,255,255,0.6);
+        }
+        .video_cam{
+            margin-left: 50px;
+            margin-top: 5px;
+        }
+        .video_cam span{
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            margin-right: 20px;
+        }
+        .msg_cotainer{
+            margin-top: auto;
+            margin-bottom: auto;
+            margin-left: 10px;
+            border-radius: 25px;
+            background-color: #82ccdd;
+            padding: 10px;
+            position: relative;
+        }
+        .msg_cotainer_send{
+            margin-top: auto;
+            margin-bottom: auto;
+            margin-right: 10px;
+            border-radius: 25px;
+            background-color: #78e08f;
+            padding: 10px;
+            position: relative;
+        }
+        .msg_time{
+            position: absolute;
+            left: 0;
+            bottom: -15px;
+            color: rgba(255,255,255,0.5);
+            font-size: 10px;
+        }
+        .msg_time_send{
+            position: absolute;
+            right:0;
+            bottom: -15px;
+            color: rgba(255,255,255,0.5);
+            font-size: 10px;
+        }
+        .msg_head{
+            position: relative;
+        }
+        #action_menu_btn{
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            color: white;
+            cursor: pointer;
+            font-size: 20px;
+        }
+        .action_menu{
+            z-index: 1;
+            position: absolute;
+            padding: 15px 0;
+            background-color: rgba(0,0,0,0.5);
+            color: white;
+            border-radius: 15px;
+            top: 30px;
+            right: 15px;
+            display: none;
+        }
+        .action_menu ul{
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .action_menu ul li{
+            width: 100%;
+            padding: 10px 15px;
+            margin-bottom: 5px;
+        }
+        .action_menu ul li i{
+            padding-right: 10px;
+
+        }
+        .action_menu ul li:hover{
+            cursor: pointer;
+            background-color: rgba(0,0,0,0.2);
+        }
+        @media(max-width: 576px){
+            .contacts_card{
+                margin-bottom: 15px !important;
+            }
+        }
+    </style>
+
+
+{% endblock %}
+

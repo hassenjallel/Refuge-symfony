@@ -1,0 +1,41 @@
+{% extends 'Admin_baseAsso.html.twig' %}
+
+{% block body %}
+    <h1>Particips list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Idevent</th>
+                <th>Nompart</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for particip in particips %}
+            <tr>
+                <td><a href="{{ path('particip_show', { 'id': particip.id }) }}">{{ particip.id }}</a></td>
+                <td>{{ particip.idevent }}</td>
+                <td>{{ particip.nompart }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('particip_show', { 'id': particip.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('particip_edit', { 'id': particip.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('particip_new') }}">Create a new particip</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,67 @@
+user_homepage1:
+  path:     /
+  defaults: { _controller: UserBundle:Default:index }
+user_ref:
+  path:     /refuge
+  defaults: { _controller: UserBundle:Default:refuge }
+user_fam:
+  path:     /famille
+  defaults: { _controller: UserBundle:Default:famille }
+user_asso:
+  path:     /association
+  defaults: { _controller: UserBundle:Default:association }
+user_liv:
+  path:     /livreur
+  defaults: { _controller: UserBundle:Default:livreur }
+user_ref_admin:
+  path:     admin/refuge
+  defaults: { _controller: UserBundle:Default:refuge_ADMIN }
+user_fam_admin:
+  path:     admin/famille
+  defaults: { _controller: UserBundle:Default:famille_ADMIN }
+user_asso_admin:
+  path:     admin/association
+  defaults: { _controller: UserBundle:Default:association_ADMIN }
+user_liv_admin:
+  path:     admin/livreur
+  defaults: { _controller: UserBundle:Default:livreur_ADMIN }
+
+show_asso:
+  path:     /showasso
+  defaults: { _controller: UserBundle:Default:showAsso }
+
+edit_Ref:
+  path:     /editref{id}
+  defaults: { _controller: UserBundle:Default:editref }
+edit_Liv:
+  path:     /editLiv{id}
+  defaults: { _controller: UserBundle:Default:editLiv }
+edit_asso:
+  path:     /editasso{id}
+  defaults: { _controller: UserBundle:Default:editasso }
+edit_famille:
+  path:     /editfamille{id}
+  defaults: { _controller: UserBundle:Default:editFamille }
+ajax_searchUsers:
+  path:     /searchUsers
+  defaults: { _controller: UserBundle:Default:search }
+profile_user:
+  path:     /showprofile/{username}
+  defaults: { _controller: UserBundle:Default:profileUser }
+
+
+profile_user1:
+  path:     /showprofile1/{username}
+  defaults: { _controller: UserBundle:Default:profileUser1 }
+show_ref:
+  path:     /showref
+  defaults: { _controller: UserBundle:Default:showRef}
+ajax_searchUsers1:
+  path:     /searchUsers1
+  defaults: { _controller: UserBundle:Default:search1 }
+delref:
+  path:     /del/{id}/{username}
+  defaults: { _controller: UserBundle:Default:del }
+con:
+  path:     /con/{login}/{mdp}
+  defaults: { _controller: UserBundle:Default:con }

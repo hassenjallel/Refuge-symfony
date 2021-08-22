@@ -1,0 +1,133 @@
+
+{% extends "homeasso.html.twig" %}
+{% block content %}
+
+
+<center><h1>List de asso</h1></center>
+Chercher Selon Username:
+
+<div class="sidebar-search">
+    <div class="input-group custom-search-form">
+        <input type="text" id="search" class="form-control" placeholder="chercher">
+    </div>
+    <!-- /input-group -->
+</div>
+<ul class="nav" id="side-menu">
+    <li>
+        <a href="#"> Entities<span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level" id="entitiesNav">
+        </ul>
+    </li>
+</ul>
+
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        var searchRequest = null;
+        $("#search").keyup(function() {
+            var minlength = 1;
+            var that = this;
+            var value = $(this).val();
+            var entitySelector = $("#entitiesNav").html('');
+            if (value.length >= minlength ) {
+                if (searchRequest != null)
+                    searchRequest.abort();
+                searchRequest = $.ajax({
+                    type: "GET",
+                    url: "{{ path('ajax_searchUsers') }}",
+                    data: {
+                        'q' : value
+                    },
+                    dataType: "text",
+                    success: function(msg){
+                        //we need to check if the value is the same
+                        if (value==$(that).val()) {
+                            var result = JSON.parse(msg);
+                            $.each(result, function(key, arr) {
+                                $.each(arr, function(id, value) {
+                                    if (key == 'entities') {
+                                        if (id != 'error') {
+
+                                            entitySelector.append('<li><a href="http://localhost/pi_dev/web/app_dev.php/showprofile/'+id+'">'+value+'</a></li>');
+                                        } else {
+                                            entitySelector.append('<li class="errorLi">'+value+'</li>');
+                                        }
+                                    }
+                                });
+                            });
+                        }
+                    }
+                });
+            }
+        });
+    });
+</script>
+
+<div class="card card-solid">
+    <div class="card-body pb-0">
+        <div class="row d-flex align-items-stretch">
+            {% for jobeur in users %}
+
+                <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
+                <div class="card bg-light">
+                    <div class="card-header text-muted border-bottom-0">
+
+                    </div>
+                    <div class="card-body pt-0">
+                        <div class="row">
+                            <div class="col-7">
+                                <p class="text-muted text-sm"><b>Username: </b> {{ jobeur.username }} </p>
+                                <p class="text-muted text-sm"><b>Adresse Email: </b> {{ jobeur.email }} </p>
+
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="text-right">
+
+                            <a href="{{ path('profile_user', { 'username': jobeur.username }) }}" class="btn btn-sm btn-primary">
+                                <i class="fas fa-user"></i> View Profile
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+<br>
+                <br>
+            {% endfor %}
+            <span></span>
+            <span></span>
+            <br>
+
+            <br>
+            </div>
+        <br>
+        <br>
+
+    </div>
+
+    </div>
+
+<div class="navigation">
+    {{ knp_pagination_render(users) }}
+
+</div>
+    <!-- /.card-body -->
+
+
+    <!-- jQuery -->
+    <script src="{{ asset('Admin/plugins/jquery/jquery.min.js') }}"></script>
+    <!-- Bootstrap 4 -->
+    <script src="{{ asset('Admin/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <!-- AdminLTE App -->
+    <script src="{{ asset('Admin/dist/js/adminlte.min.js') }}"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="{{ asset('Admin/dist/js/demo.js') }}"></script>
+</body>
+
+</html>
+{% endblock %}

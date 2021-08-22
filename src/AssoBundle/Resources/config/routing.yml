@@ -1,0 +1,123 @@
+clubexemple:
+  path:     /index
+  defaults: { _controller: AssoBundle:Default:index }
+message:
+  path:     /message
+  defaults: { _controller: AssoBundle:Default:listcontact }
+show_famille:
+  path:     /showfamille
+  defaults: { _controller: AssoBundle:Default:showfamille }
+all:
+  path:     /all
+  defaults: { _controller: AssoBundle:mobile:all }
+listlogin:
+  path:     /listLog/{s}
+  defaults: { _controller: AssoBundle:mobile:ListLogin }
+new:
+  path:     /new/{idMessage}/{loginEnvoi}/{loginRecep}/{msg}
+  defaults: { _controller: AssoBundle:mobile:new }
+msg:
+  path:     /msg/{loginEnvoi}/{loginRecep}
+  defaults: { _controller: AssoBundle:mobile:msg }
+adduser:
+  path:     /adduser/{nom}/{email}/{username}/{password}/{roles}/{tel}/{pays}/{code}/{add}
+  defaults: { _controller: AssoBundle:mobile:adduser }
+envoyezmail:
+  path:     /envoyezmail
+  defaults: { _controller: AssoBundle:mobile:envoyezmail }
+userverfication:
+  path:     /userverfication
+  defaults: { _controller: AssoBundle:mobile:Userverifaication }
+Login:
+  path:     /login/{username}/{password}
+  defaults: { _controller: AssoBundle:mobile:Login }
+userdata:
+  path:     /userdata/{username}
+  defaults: { _controller: AssoBundle:mobile:userdata }
+updateuser:
+  path:     /updateuser/{id}/{nom}/{email}/{username}/{password}/{tel}/{pays}/{add}
+  defaults: { _controller: AssoBundle:mobile:updateuser }
+listquest:
+  path:     /listquest
+  defaults: { _controller: AssoBundle:mobile:listquest }
+mobquest:
+  path:     /mobquest/{h}
+  defaults: { _controller: AssoBundle:mobile:mobquest }
+mobquest2:
+  path:     /mobquest2/{h}/{login}
+  defaults: { _controller: AssoBundle:mobile:mobquest2 }
+ajoutquestmob:
+  path:     /ajoutquestmob/{id}/{user}/{val}/{idval}
+  defaults: { _controller: AssoBundle:mobile:ajoutquestmob }
+
+
+
+
+
+ajax_searchUsers_fam:
+  path:     /searchUsers
+  defaults: { _controller: AssoBundle:Default:search }
+profile_user_fam:
+  path:     /showprofile/{username}
+  defaults: { _controller: AssoBundle:Default:profileUser }
+  ##messageaffiche:
+ ## path:     /message/{idMessage}/{idRecep}/{loginEnvoi}/{loginRecep}
+  ##defaults: { _controller: AssoBundle:Default:ajoutMessage }
+messageaffiche:
+  path:     /message2/{idMessage}/{loginEnvoi}/{loginRecep}
+  defaults: { _controller: AssoBundle:Default:ajoutMessage2 }
+pdf:
+  path:     /message2/{loginEnvoi}/{loginRecep}
+  defaults: { _controller: AssoBundle:Default:pdf }
+messageaffich2e:
+  path:     /message2/{loginRecep}
+  defaults: { _controller: AssoBundle:Default:ajoutMessage }
+chatbot:
+  path:     /chatbot
+  defaults: { _controller: AssoBundle:Default:chatbot }
+chat_msg:
+  path:     /chatbotmsg
+  defaults: { _controller: AssoBundle:Default:chat }
+help:
+  path:     /help
+  defaults: { _controller: AssoBundle:question:help }
+redi:
+  path:     /question/{id}
+  defaults: { _controller: AssoBundle:question:quest }
+ajout:
+  path:     /ajout{questt}
+  defaults: { _controller: AssoBundle:question:ajout }
+modif:
+  path:     /modif{questt}{username}
+  defaults: { _controller: AssoBundle:question:modif }
+ajax_searchUsers_quest:
+  path:     /searchUsers22
+  defaults: { _controller: AssoBundle:question:search22 }
+m:
+  path:     /searchUsesgsgfbsgfbgbf/{id}
+  defaults: { _controller: AssoBundle:question:m }
+val:
+  path:     /searchUsesgsgfbsgfbc
+  defaults: { _controller: AssoBundle:question:val }
+rmu:
+  path:     /searchUsesgsgfbsgfdfvdvfdfvbgbf/{id}
+  defaults: { _controller: AssoBundle:Adminasso:rmu }
+rma:
+  path:     /searchUsesgsgfbsgfbgbcvf/{id}
+  defaults: { _controller: AssoBundle:Adminasso:rma }
+
+table_admin_asso:
+  path:     /indexAdmin
+  defaults: { _controller: AssoBundle:Adminasso:index_admin }
+rmUser:
+  path:     /removeUser/{id}
+  defaults: { _controller: AssoBundle:Adminasso:rmUser }
+test:
+  path:     /testlij
+  defaults: { _controller: AssoBundle:Adminasso:test }
+ajoutquest:
+  path:     /questadmin
+  defaults: { _controller: AssoBundle:Adminasso:ajoutquest }
+#m:
+ # path:     /modifquestadmin
+  #defaults: { _controller: AssoBundle:question:m }

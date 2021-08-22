@@ -1,0 +1,3 @@
+spons_homepage:
+    path:     /
+    defaults: { _controller: sponsBundle:Default:index }

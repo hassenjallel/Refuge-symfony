@@ -1,0 +1,109 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+
+
+
+</div>
+<div class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1>Contact</h1>
+            </div><!-- .col -->
+        </div><!-- .row -->
+    </div><!-- .container -->
+</div><!-- .page-header -->
+
+<div class="contact-page-wrap">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-lg-5">
+                <div class="entry-content">
+                    <h2>Get In touch with us</h2>
+
+                    <p></p>
+                    <ul class="contact-social d-flex flex-wrap align-items-center">
+                        <li><a href="#"><i class="fa fa-pinterest-p"></i></a></li>
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                        <li><a href="#"><i class="fa fa-behance"></i></a></li>
+                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                    </ul>
+
+                    <ul class="contact-info p-0">
+                        <li><i class="fa fa-phone"></i><span>+216 24 933 784</span></li>
+                        <li><i class="fa fa-envelope"></i><span>Solidarity.refugee@gmail.com</span></li>
+                        <li><i class="fa fa-map-marker"></i><span>Z.I. Chotrana II B.P. 160,Pôle Technologique El Ghazela - Ariana 2083
+                            </span>
+                    </ul>
+                </div>
+            </div><!-- .col -->
+
+            <div class="col-12 col-lg-7">
+
+                <form action="{{ path("fos_user_registration_register") }}" method="post" class="contact-form">
+                    <div class="form-group" id="fos_user_registration_form">
+
+
+
+                    <label>Email : </label>
+
+
+
+
+                    {{ form_widget(form.email, { 'attr': {'class': 'form-input', 'placeholder': 'Your Email','type':'email','name':'email','id':'email' } }) }}
+                    <label>Username : </label>
+
+                    {{ form_widget(form.username, { 'attr': {'class': 'form-input', 'placeholder': 'Your Email','type':'text','name':'name','id':'email' } }) }}
+                    <label>Password :</label>
+                    <span> </span>
+
+                    {{ form_widget(form.plainPassword.first, { 'attr': {'class': 'form-input col-md-12 col-sm-12  ', 'placeholder':'Password','type':'text','name':'password','id':'email' } }) }}
+                    <span> </span>
+                    <label> Repeat password : </label>
+                    <span> </span>
+
+                    {{ form_widget(form.plainPassword.second, { 'attr': {'class': 'form-input col-md-12 col-sm-12', 'placeholder':'Password','type':'text','name':'password','id':'email' } }) }}
+                        <span> </span>
+
+                        <label> Role : </label>
+                        <span> </span>
+
+                        {{ form_widget(form.roles, { 'attr': {'class': 'form-input col-md-12 col-sm-12', 'placeholder': 'Role'|trans } }) }}
+
+{#
+                        {{ form_widget(form.image, { 'attr': {'class': 'form-input col-md-12 col-sm-12', 'placeholder': 'Role'|trans } }) }}
+#}
+
+                    <span>
+
+
+
+                                <input type="submit"  class="btn gradient-bg" value="{{ 'registration.submit'|trans }}" />
+
+                        </span>
+
+
+                    {{ form_rest(form) }}
+
+
+
+                    <span> </span>
+
+
+
+            </div>
+            </form><!-- .contact-form -->
+
+
+
+        </div><!-- .col -->
+
+        <div class="col-12">
+            <div class="contact-gmap">
+            </div>
+        </div>
+    </div><!-- .row -->
+</div><!-- .container -->
+</div>

@@ -1,0 +1,62 @@
+{% extends 'baseRef.html.twig' %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="contact-form-area">
+                                <div class="contact-form-title">
+                                    <h2>Modifier votre Sujet {{ sujet.titresujet }}</h2>
+                                </div>
+                                <form id="form" action="{{ path('majsujet',{'id':sujet.idsujetrc}) }}" method="post">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Titre de Sujet</label>
+                                            <div class="contact-form-style mb-20">
+                                                <span style="color: red;" id="grostitre">Veuillez saisir vos information d'une manniere plus approprié ! LANGUAGE INNAPROPRIE</span>
+                                                <input id="titre" required value="{{ sujet.titresujet }}" name="title" placeholder="Titre du sujet *" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label>Catégorie</label>
+                                            <div class="contact-form-style mb-20">
+                                                <select name="categorie" form="form">
+                                                    <option value="refuge">refuge</option>
+                                                    <option value="famille">famille</option>
+                                                    <option value="association">association</option>
+                                                </select>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label>Choisir une image</label>
+                                            <div class="contact-form-style mb-20">
+                                                <input required name="image"  value="{{ sujet.image }}" type="file"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="contact-form-style form-style-2">
+                                                <label>Description du sujet</label>
+                                                <span style="color: red;" id="grostitre2">Veuillez saisir vos information d'une manniere plus approprié ! LANGUAGE INNAPROPRIE</span>
+
+                                                <textarea required id="contenu" form=form" name="contenu"  placeholder="Type your message here..">{{ sujet.contenu }}</textarea>
+                                                <button id="submit" class="form-button" type="submit"><span>Send Email</span></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}

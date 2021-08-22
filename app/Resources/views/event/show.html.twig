@@ -1,0 +1,56 @@
+{% extends 'Admin_baseAsso.html.twig' %}
+
+{% block content %}
+    <h1>Event</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ event.id }}</td>
+            </tr>
+            <tr>
+                <th>Nomevent</th>
+                <td>{{ event.nomEvent }}</td>
+            </tr>
+            <tr>
+                <th>Nomassoc</th>
+                <td>{{ event.nomAssoc }}</td>
+            </tr>
+            <tr>
+                <th>Phonenumber</th>
+                <td>{{ event.phoneNumber }}</td>
+            </tr>
+            <tr>
+                <th>Startdate</th>
+                <td>{% if event.startDate %}{{ event.startDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Enddate</th>
+                <td>{% if event.endDate %}{{ event.endDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Location</th>
+                <td>{{ event.location }}</td>
+            </tr>
+            <tr>
+                <th>Objectif</th>
+                <td>{{ event.objectif }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('event_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('event_edit', { 'id': event.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

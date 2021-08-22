@@ -1,0 +1,105 @@
+
+{% extends 'baseAsso.html.twig' %}
+{% block content %}
+
+
+
+
+
+
+
+
+    <div class="page-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h1>Contact</h1>
+                </div><!-- .col -->
+            </div><!-- .row -->
+        </div><!-- .container -->
+    </div><!-- .page-header -->
+
+    <div class="contact-page-wrap">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-5">
+                    <div class="entry-content">
+                        <h2>Get In touch with us</h2>
+
+                        <p></p>
+                        <ul class="contact-social d-flex flex-wrap align-items-center">
+                            <li><a href="#"><i class="fa fa-pinterest-p"></i></a></li>
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                            <li><a href="#"><i class="fa fa-behance"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        </ul>
+
+                        <ul class="contact-info p-0">
+                            <li><i class="fa fa-phone"></i><span>+216 24 933 784</span></li>
+                            <li><i class="fa fa-envelope"></i><span>Solidarity.refugee@gmail.com</span></li>
+                            <li><i class="fa fa-map-marker"></i><span>Z.I. Chotrana II B.P. 160,Pôle Technologique El Ghazela - Ariana 2083</span>
+                        </ul>
+                    </div>
+                </div><!-- .col -->
+
+                <div class="col-12 col-lg-7">
+
+                    <form  method="post" class="contact-form" enctype="multipart/form-data">
+                        {{ form_start(form_edit, { 'action': path('fos_user_profile_edit_asso'), 'attr': { 'class': 'fos_user_profile_edit_asso' } }) }}
+
+                        {{ form_row(form_edit._token) }}
+
+                        <label>Nom : </label>
+
+                        {{ form_widget(form_edit.nom, { 'attr': {'class': 'form-input', 'placeholder': 'Your Email','type':'email','name':'email','id':'email' } }) }}
+                        <label>Prenom : </label>
+
+                        {{ form_widget(form_edit.prenom, { 'attr': {'class': 'form-input', 'placeholder': 'Your Email','type':'text','name':'name','id':'email' } }) }}
+                        <label>tel : </label>
+
+
+                        {{ form_widget(form_edit.tel, { 'attr': {'class': 'form-input', 'placeholder': 'Your tel','type':'text','name':'tel','id':'tel' } }) }}
+                        <span> </span>
+
+                        <label>pays : </label>
+
+                        {{ form_widget(form_edit.pays, { 'attr': {'class': 'form-input', 'placeholder': 'Your pays','type':'text','name':'pays','id':'pays' } }) }}
+
+                        <label>add : </label>
+
+                        {{ form_widget(form_edit.add, { 'attr': {'class': 'form-input', 'placeholder': 'Your add','type':'text','name':'add','id':'add' } }) }}
+
+                        <label>domaine : </label>
+
+                        {{ form_widget(form_edit.domaine, { 'attr': {'class': 'form-input', 'placeholder': 'Your domaine','type':'text','name':'domaine','id':'domaine' } }) }}
+                        {{ form_widget(form_edit.image, { 'attr': {'name':'image','id':'image'}})}}
+
+                        <span>
+        <input type="submit" class="btn gradient-bg" value="valider" />
+
+
+                        </span>
+
+                    </form><!-- .contact-form -->
+                    {{ form(form_edit) }}
+
+
+                </div><!-- .col -->
+
+                <div class="col-12">
+                    <div class="contact-gmap">
+                    </div>
+                </div>
+            </div><!-- .row -->
+        </div><!-- .container -->
+    </div>
+
+
+
+{% endblock content %}
+
+
+
+

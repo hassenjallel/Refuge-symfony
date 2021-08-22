@@ -1,0 +1,25 @@
+{% extends 'Admin_baseAsso.html.twig' %}
+
+{% block content %}
+
+<h3>name of event : {{ event.nomEvent }} </h3>
+
+    <h3>voici les participants</h3>
+
+    <table class="table table-bordered table-striped table-hover">
+        <tbody>
+        {% for particip in particips %}
+        <tr>
+
+            <td><h5>{{ particip.nompart }}</h5></td>
+
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+
+
+    </ul>
+{% endblock %}

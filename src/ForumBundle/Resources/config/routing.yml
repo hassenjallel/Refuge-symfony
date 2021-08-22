@@ -1,0 +1,92 @@
+forum_homepage:
+    path:     /index
+    defaults: { _controller: ForumBundle:ForumAdmin:index }
+dispaly_all:
+    path:     /listsujets
+    defaults: { _controller: ForumBundle:Default:getSubjects }
+sujetByid:
+    path:     /sujet/{id}
+    defaults: { _controller: ForumBundle:Default:detailSujet }
+add_reposne:
+    path:     /addreponse/{id}
+    defaults: { _controller: ForumBundle:Default:addrep }
+    methods:   [POST]
+add_sujet:
+    path:     /addsujet
+    defaults: { _controller: ForumBundle:Default:addSujet }
+add:
+    path:     /add
+    defaults: { _controller: ForumBundle:Default:addSujet }
+    methods:   [POST]
+like:
+    path:     /likeresp/{idrep}/{id}
+    defaults: { _controller: ForumBundle:Default:like }
+dislike:
+    path:     /dislike/{idrep}/{id}
+    defaults: { _controller: ForumBundle:Default:dislike }
+deletesujet:
+    path:     /deletesujet/{id}
+    defaults: { _controller: ForumBundle:Default:deleteSujet }
+updatesujet:
+    path:     /updatesujet/{id}
+    defaults: { _controller: ForumBundle:Default:updateSujet }
+majsujet:
+    path:     /majsujet/{id}
+    defaults: { _controller: ForumBundle:Default:majSujet }
+updaterep:
+    path:     /updaterep/{id}
+    defaults: { _controller: ForumBundle:Default:updateComment }
+majrep:
+    path:     /majrep/{id}/{idsujet}
+    defaults: { _controller: ForumBundle:Default:majComment }
+deleterep:
+    path:     /deleterep/{id}/{idsujet}
+    defaults: { _controller: ForumBundle:Default:deleterep }
+resolue:
+    path:     /resolue/{id}
+    defaults: { _controller: ForumBundle:Default:resolue }
+pushup:
+    path:     /pushup/{id}
+    defaults: { _controller: ForumBundle:Default:pushup }
+pushdown:
+    path:     /pushdown/{id}
+    defaults: { _controller: ForumBundle:Default:pushdown }
+deletevote:
+    path:     /deletevote/{id}/{idsujet}
+    defaults: { _controller: ForumBundle:Default:deletevote }
+
+admin_index_forun:
+    path:     /admin/index
+    defaults: { _controller: ForumBundle:ForumAdmin:index }
+spam:
+    path:     /spam/{id}
+    defaults: { _controller: ForumBundle:Default:signalezsujet }
+detailback:
+    path:     /admin/detailback/{id}
+    defaults: { _controller: ForumBundle:ForumAdmin:detailsujet }
+deleteback:
+    path:     /admin/deleteback/{id}
+    defaults: { _controller: ForumBundle:ForumAdmin:delete }
+deletecom:
+    path:     /admin/deleterepback/{id}/{idsujet}
+    defaults: { _controller: ForumBundle:ForumAdmin:deleterep }
+sujetsapm:
+    path:     /admin/sujetspam
+    defaults: { _controller: ForumBundle:ForumAdmin:listsujetspam }
+deletesapm:
+    path:     /admin/deletespam/{id}
+    defaults: { _controller: ForumBundle:ForumAdmin:deletespam }
+stat:
+    path:     /admin/stat
+    defaults: { _controller: ForumBundle:ForumAdmin:stat }
+search:
+    path:     /search
+    defaults: { _controller: ForumBundle:Default:search }
+
+
+
+
+
+
+
+

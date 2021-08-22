@@ -1,0 +1,38 @@
+{% extends 'Admin_baseAsso.html.twig' %}
+{% block javascripts %}
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v6.0&appId=895174904251443&autoLogAppEvents=1"></script>
+{% endblock %}
+{% block content %}
+    {#{{ dump(result) }}#}
+
+    <h1>Sponsorings list</h1>
+    <table>
+        <thead>
+        <tr>
+
+            <th>nom produit</th>
+            <th>quantite dispo</th>
+            <th>nos besoins</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for besoin in besoins %}
+            <tr>
+                <td>{{ besoin.nomProduit }}</td>
+                <td>{{ besoin.quantiteDispo }}</td>
+                <td>{{ besoin.nosBesoins }}</td>
+                <td>
+                    <ul>
+
+                        <li>
+                            <div class="fb-share-button" data-href="https://www.facebook.com/groups/521569035222275/?ref=group_browse" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.facebook.com%2Fgroups%2F521569035222275%2F%3Fref%3Dgroup_browse&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Partager</a></div>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

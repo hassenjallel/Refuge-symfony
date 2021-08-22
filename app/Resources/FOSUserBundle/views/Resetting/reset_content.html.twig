@@ -1,0 +1,74 @@
+
+
+
+
+<div class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1>Contact</h1>
+            </div><!-- .col -->
+        </div><!-- .row -->
+    </div><!-- .container -->
+</div><!-- .page-header -->
+
+<div class="contact-page-wrap">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-lg-5">
+                <div class="entry-content">
+                    <h2>Get In touch with us</h2>
+
+                    <p></p>
+                    <ul class="contact-social d-flex flex-wrap align-items-center">
+                        <li><a href="#"><i class="fa fa-pinterest-p"></i></a></li>
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                        <li><a href="#"><i class="fa fa-behance"></i></a></li>
+                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                    </ul>
+
+                    <ul class="contact-info p-0">
+                        <li><i class="fa fa-phone"></i><span>+216 24 933 784</span></li>
+                        <li><i class="fa fa-envelope"></i><span>Solidarity.refugee@gmail.com</span></li>
+                        <li><i class="fa fa-map-marker"></i><span>Z.I. Chotrana II B.P. 160,Pôle Technologique El Ghazela - Ariana 2083</span>
+                    </ul>
+                </div>
+            </div><!-- .col -->
+
+            <div class="col-12 col-lg-7">
+                <form  class="contact-form">
+
+                    {% trans_default_domain 'FOSUserBundle' %}
+
+                    {{ form_start(form, { 'action': path('fos_user_resetting_reset', {'token': token}), 'attr': { 'class': 'fos_user_resetting_reset' } }) }}
+                    {{ form_widget(form) }}
+                    <div>
+                        <input type="submit" value="{{ 'resetting.reset.submit'|trans }}" />
+                    </div>
+                    {{ form_end(form) }}
+
+
+
+
+
+
+                </form>
+
+            </div><!-- .col -->
+
+            <div class="col-12">
+                <div class="contact-gmap">
+                </div>
+            </div>
+        </div><!-- .row -->
+    </div><!-- .container -->
+</div>
+
+
+
+
+
+
+

@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+
+
+
+{% block content %}
+
+<div class="col-12 col-lg-12">
+    <form class="contact-form">
+        <input type="text" placeholder="Name">
+        <input type="email" placeholder="Email">
+
+
+        <span>
+                            <input class="btn gradient-bg" type="submit" value="Contact us">
+                        </span>
+    </form><!-- .contact-form -->
+    <div/>
+
+
+    <div class="col-12 col-md-6 col-lg-3">
+        <div class="foot-about">
+            <h2><a class="foot-logo" href="#"><img src="{{ asset('') }}" alt=""></a></h2>
+
+
+        </div><!-- .foot-about -->
+    </div><!-- .col -->
+
+
+    {% endblock %}
+

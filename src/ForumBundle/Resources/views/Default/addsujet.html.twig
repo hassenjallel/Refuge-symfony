@@ -1,0 +1,59 @@
+{% extends 'baseRef.html.twig' %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="donation-form-wrap">
+
+                    <h2>Presentez nous votre Sujet  <a  href="{{ path('dispaly_all') }}" style="font-size:20px;margin-left:500px;font-style: italic;">List des sujets </a>
+                    </h2>
+                    <form id="form" action="#" method="post">
+
+                    <div class="col-md-6">
+                        <label><h4 class="mt-5">Catégorie</h4></label>
+                        <div class="contact-form-style mb-20">
+                            <class="contact-form-style mb-20">
+                            <select name="categorie" form="form">
+                                <option value="refuge">refuge</option>
+                                <option value="famille">famille</option>
+                                <option value="association">association</option>
+
+                            </select>
+                        </div>
+                    </div>
+
+
+
+                        <div class="billing-information  d-flex flex-wrap justify-content-between align-items-center">
+
+                            <h6 class="w-100 mt-5 mb-3">Titre de Sujet</h6>
+                            <input  type="text"  placeholder="titre" required name="title" placeholder="Titre du sujet*">
+                            <h4 class="w-100 mt-5 mb-3">Choisir une image</h4>
+                            <div class="contact-form-style mb-20">
+                                <input required name="image" id="image" form="form" type="file">
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="contact-form-style form-style-2">
+
+                                    <h6 class="w-100 mt-5 mb-3">Description du sujet</h6>
+                                    <textarea rows="8" cols="50" required id="contenu" form="form" name="contenu" placeholder="Type your message here.."></textarea>
+
+                                    <button style="margin-left: 50%" id="submit" class="btn gradient-bg mt-5" type="submit"><span>ajouter sujet</span></button>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                </div>
+            </div>
+        </div>
+        </form>
+    </div>
+
+
+
+
+{% endblock %}

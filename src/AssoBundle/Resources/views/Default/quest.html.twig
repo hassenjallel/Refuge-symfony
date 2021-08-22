@@ -1,0 +1,267 @@
+{% extends "homeasso.html.twig" %}
+{% block content %}
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+
+
+    </head>
+    <div id="fb-root"></div>
+    <body class="single-page about-page">
+
+    <div class="page-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h1>Help center</h1>
+                </div><!-- .col -->
+            </div><!-- .row -->
+        </div><!-- .container -->
+    </div><!-- .page-header -->
+
+
+    <form class="container">
+        <div class="form-row justify-content-center">
+            <div class="form-group col-md-3">
+                <div class="input-group mx-auto mb-12">
+
+                    <span></span>
+                    <br>
+                    Search with Username
+
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <form class="container">
+        <div class="form-row justify-content-center">
+            <div class="form-group col-md-3">
+                <div class="input-group mx-auto mb-12">
+
+
+                    <input type="text" id="search" class="form-control" placeholder="search .. " style="text-align:center">
+
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+
+
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+
+
+
+    <div class="portfolio-wrap">
+        <div class="container">
+            <div class="row portfolio-container">
+                <div>
+                    <div class="card-body pb-0">
+                        <div class="row d-flex align-items-stretch">
+
+                                <div  class="col-12 portfolio-item">
+                                    <div >
+                                        <div >
+
+                                        </div>
+                                        <div>
+                                            <div>
+                                                <div >
+                                                    <p class="text-muted text-sm"><b>Question: </b> {{ quest.quest }} </p>
+                                                    <p class="text-muted text-sm"><b>Reponse : </b> {{ quest.rep }} </p>
+
+
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div >
+                                            <div class="text-right">
+
+                                                {#     <a href="{{ path('profile_user_fam', { 'username': i.username }) }}"   class="btn gradient-bg btn-primary "> #}
+                                                    <i  class="fas fa-user"></i> select
+                                                </a>
+
+
+
+                                                {{ form_start(form,{'attr': {}}) }}
+
+                                                {# {{ form_widget(form.save, { 'attr': {'class': 'form-input', 'placeholder': 'Write your message...','type':'text','name':'message','id':'message' } }) }}
+                                                 #}
+                                                <input type="hidden" name="quest" class="form-control type_msg" value="{{quest.quest }}">
+                                                <input type="hidden" name="rep" class="form-control type_msg" value="{{quest.rep }}">
+                                                <input type="hidden" name="id" class="form-control type_msg" value="{{quest.idquest }}">
+
+                                                <input type="hidden" name="ques" class="form-control type_msg" value="{{app.user.username }}">
+                                                {{ form_widget(form.val, { 'attr': {} }) }}
+                                             {#   {{ form_widget(form.save, { 'attr': {'type':'button' ,'class': 'btn gradient-bg btn-primary'} }) }}
+
+                                               #} <input type="submit"  class="btn gradient-bg" value="Save" href="{{ path('help') }}" />
+
+                                                {{ form_end(form) }}
+                                               {# <div>
+                                                    <input type="radio" id="louie" name="drone" value="1">1
+                                                    <input type="radio" id="louie" name="drone" value="2">2
+                                                    <input type="radio" id="louie" name="drone" value="3">3
+                                                    <input type="radio" id="louie" name="drone" value="4">4
+                                                    <input type="radio" id="louie" name="drone" value="5">5
+
+                                                </div>
+
+#}
+
+
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <span></span>
+                                <br>
+
+                                <br>
+                            <span></span>
+                            <span></span>
+                            <br>
+                            <br>
+                        </div>
+                        <br>
+                        <br>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+{#
+    <div class="navigation">
+        {{ knp_pagination_render(quest) }}
+
+    </div>
+
+#}
+
+    <br>
+
+
+    <div class="about-stats">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="circular-progress-bar">
+                        <div class="circle" id="loader_1">
+                            <strong class="d-flex justify-content-center"></strong>
+                        </div>
+
+                        <h3 class="entry-title">Hard Work</h3>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="circular-progress-bar">
+                        <div class="circle" id="loader_2">
+                            <strong class="d-flex justify-content-center"></strong>
+                        </div>
+
+                        <h3 class="entry-title">Pure Love</h3>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="circular-progress-bar">
+                        <div class="circle" id="loader_3">
+                            <strong class="d-flex justify-content-center"></strong>
+                        </div>
+
+                        <h3 class="entry-title">Smart Ideas</h3>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="circular-progress-bar">
+                        <div class="circle" id="loader_4">
+                            <strong class="d-flex justify-content-center"></strong>
+                        </div>
+
+                        <h3 class="entry-title">Good Decisions</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <div class="help-us">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 d-flex flex-wrap justify-content-between align-items-center">
+                    <h2>Help us so we can help others</h2>
+
+                    <a class="btn orange-border" href="#">Donate now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    {# Call NotificationsBundles's assets #}
+    {{ notifications_assets() }}
+    <script>
+        /**
+         * After calling notifications_assets() "pusher" is now available
+         * and you can use it this way
+         */
+
+            // select the channel you want to listen to
+        var channel = pusher.subscribe("notifications");// notifications channel
+        channel.bind("my-event", function(data) {
+            console.log('from notifications channel', data);
+        });
+
+        var channel = pusher.subscribe("messages");// messages channel
+        channel.bind("my-event", function(data) {
+            console.log('from messages channel', data);
+        });
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+    </html>
+{% endblock %}

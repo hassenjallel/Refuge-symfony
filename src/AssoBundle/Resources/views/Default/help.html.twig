@@ -1,0 +1,348 @@
+{% extends "homeasso.html.twig" %}
+{% block content %}
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+
+
+    </head>
+    <body class="single-page about-page">
+
+    <div class="page-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h1>Help center</h1>
+                </div><!-- .col -->
+            </div><!-- .row -->
+        </div><!-- .container -->
+    </div><!-- .page-header -->
+
+
+    <form class="container">
+        <div class="row">
+            <div class="col-lg-9">
+            </div>
+            <div class="col-lg-2 col-lg-offset-1">
+
+                {{ render(controller('AssoBundle:Notification:display')) }}
+
+                <div id="fb-root"></div>
+                <script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v6.0&appId=779531639203718&autoLogAppEvents=1"></script>
+                <div class="fb-share-button" data-href="https://www.facebook.com/solidarity.refugee.92" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.facebook.com%2Fsolidarity.refugee.92&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Partager</a></div>
+                {{ socialButtons( { 'facebook': {'locale':'fr_FR', 'send':true }  } ) }}
+
+            </div></div>
+        <div class="form-row justify-content-center">
+
+            <div class="form-group col-md-3">
+
+                <div class="input-group mx-auto mb-12">
+
+                    <br>
+                    <br>
+                    <br>
+
+                    <span></span>
+                    <br>
+                    Search Question
+
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <form class="container">
+        <div class="form-row justify-content-center">
+            <div class="form-group col-md-3">
+                <div class="input-group mx-auto mb-12">
+
+
+                    <input type="text" id="search" class="form-control" placeholder="Enter question or keyword .. " style="text-align:center">
+
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
+            crossorigin="anonymous"></script>
+    <form class="container">
+        <div class="form-row justify-content-center">
+            <div class="form-group col-md-3">
+                <div class="input-group mx-auto mb-12">
+
+
+                    <ul class="nav" id="side-menu">
+                        <li>
+                            <a href="#"> Check Question <span class="fa arrow"></span></a><br>
+                            <ul class="nav nav-second-level" id="entitiesNav">
+                            </ul>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            var searchRequest = null;
+            $("#search").keyup(function() {
+                var minlength = 1;
+                var that = this;
+                var value = $(this).val();
+                var entitySelector = $("#entitiesNav").html('');
+                if (value.length >= minlength ) {
+                    if (searchRequest != null)
+                        searchRequest.abort();
+                    searchRequest = $.ajax({
+                        type: "GET",
+                        url: "{{ path('ajax_searchUsers_quest') }}",
+                        data: {
+                            'q' : value
+                        },
+                        dataType: "text",
+                        success: function(msg){
+                            //we need to check if the value is the same
+                            if (value==$(that).val()) {
+                                var result = JSON.parse(msg);
+                                $.each(result, function(key, arr) {
+                                    $.each(arr, function(id, value) {
+                                        if (key == 'entities') {
+                                            if (id != 'error') {
+
+                                                entitySelector.append('<li><a href="http://localhost/pi_dev/web/app_dev.php/Asso/question/'+id+'" >'+value+'</a></li>');
+                                            } else {
+                                                entitySelector.append('<li class="errorLi">'+value+'</li>');
+                                            }
+                                        }
+                                    });
+                                });
+                            }
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+
+
+
+    <div class="portfolio-wrap">
+        <div class="container">
+            <div class="row portfolio-container">
+                <div>
+                    <div class="card-body pb-0">
+                        <div class="row d-flex align-items-stretch">
+                            {% for i in quest %}
+
+                                <div  class="col-12 portfolio-item">
+                                    <div >
+                                        <div >
+
+                                        </div>
+                                        <div>
+                                            <div>
+                                                <div >
+                                                    <p class="text-muted text-sm"><b>Question: </b> {{ i.quest }} </p>
+                                                    <p class="text-muted text-sm"><b>Reponse : </b> {{ i.rep }} </p>
+
+
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div >
+                                            <div class="text-right">
+
+
+                                                {% trans_default_domain 'FOSUserBundle' %}
+
+
+
+
+
+
+                                                  <a href="{{ path('redi', {'id':i.id  }) }}"   class="btn gradient-bg btn-primary ">
+                                                    <i  class="fas fa-user"></i> View Question
+                                                </a>
+
+
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <span></span>
+                                <br>
+
+                                <br>
+                            {% endfor %}
+                            <span></span>
+                            <span></span>
+                            <br>
+                            <br>
+                        </div>
+                        <br>
+                        <br>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+    <div class="row">
+        <div class="col-12 d-flex justify-content-center mt-72">
+
+            <a  class="btn gradient-bg  " href="{{ path('chatbot') }}"> <h6>Online Service </h6><br>24/7 Service</a>
+
+        </div>
+
+    </div>
+<br>
+    <br>
+    <br>
+
+
+
+
+    <div class="navigation">
+        {{ knp_pagination_render(quest) }}
+
+    </div>
+
+    <br>
+    <br>
+    <br>
+
+    <div class="about-stats">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="circular-progress-bar">
+                        <div class="circle" id="loader_1">
+                            <strong class="d-flex justify-content-center"></strong>
+                        </div>
+
+                        <h3 class="entry-title">Hard Work</h3>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="circular-progress-bar">
+                        <div class="circle" id="loader_2">
+                            <strong class="d-flex justify-content-center"></strong>
+                        </div>
+
+                        <h3 class="entry-title">Pure Love</h3>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="circular-progress-bar">
+                        <div class="circle" id="loader_3">
+                            <strong class="d-flex justify-content-center"></strong>
+                        </div>
+
+                        <h3 class="entry-title">Smart Ideas</h3>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="circular-progress-bar">
+                        <div class="circle" id="loader_4">
+                            <strong class="d-flex justify-content-center"></strong>
+                        </div>
+
+                        <h3 class="entry-title">Good Decisions</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <div class="help-us">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 d-flex flex-wrap justify-content-between align-items-center">
+                    <h2>Help us so we can help others</h2>
+
+                    <a class="btn orange-border" href="#">Donate now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    {# Call NotificationsBundles's assets #}
+    {{ notifications_assets() }}
+    <script>
+        /**
+         * After calling notifications_assets() "pusher" is now available
+         * and you can use it this way
+         */
+
+            // select the channel you want to listen to
+        var channel = pusher.subscribe("notifications");// notifications channel
+        channel.bind("my-event", function(data) {
+            console.log('from notifications channel', data);
+        });
+
+        var channel = pusher.subscribe("messages");// messages channel
+        channel.bind("my-event", function(data) {
+            console.log('from messages channel', data);
+        });
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+
+    </html>
+{% endblock %}

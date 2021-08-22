@@ -1,0 +1,53 @@
+event_particip:
+    resource: "@eventBundle/Controller/participController.php"
+    type:     annotation
+
+event_event:
+    resource: "@eventBundle/Controller/eventController.php"
+    type:     annotation
+event:
+    resource: "@eventBundle/Resources/config/routing.yml"
+    prefix:   /event
+
+forum:
+    resource: "@ForumBundle/Resources/config/routing.yml"
+    prefix:   /forum
+
+stock:
+    resource: "@stockBundle/Resources/config/routing.yml"
+    prefix:   /stock
+
+spons_sponsoring:
+    resource: "@sponsBundle/Controller/sponsoringController.php"
+    type:     annotation
+
+spons:
+    resource: "@sponsBundle/Resources/config/routing.yml"
+    prefix:   /sponsoring
+
+liv:
+    resource: "@LivBundle/Controller/"
+    type:     annotation
+    prefix:   /Liv
+user:
+    resource: '@UserBundle/Resources/config/routing.yml'
+    prefix:   /
+refugee:
+    resource: '@RefugeeBundle/Resources/config/routing.yml'
+    prefix:   /Ref
+
+famille:
+    resource: '@familleBundle/Resources/config/routing.yml'
+    prefix:   /famille
+asso:
+    resource: "@AssoBundle/Resources/config/routing.yml"
+    prefix:   /Asso
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation
+    prefix:   /app
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+actualite:
+    resource: "@ActualiteBundle/Resources/config/routing.yml"
+    prefix:   /act

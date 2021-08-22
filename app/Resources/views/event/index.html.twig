@@ -1,0 +1,55 @@
+{% extends 'Admin_baseAsso.html.twig' %}
+
+{% block content %}
+
+    <h1>Events list</h1>
+
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nomevent</th>
+                <th>Nomassoc</th>
+                <th>Phonenumber</th>
+                <th>Startdate</th>
+                <th>Enddate</th>
+                <th>Location</th>
+                <th>Objectif</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for event in events %}
+            <tr>
+                <td><a href="{{ path('event_show', { 'id': event.id }) }}">{{ event.id }}</a></td>
+                <td>{{ event.nomEvent }}</td>
+                <td>{{ event.nomAssoc }}</td>
+                <td>{{ event.phoneNumber }}</td>
+                <td>{% if event.startDate %}{{ event.startDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if event.endDate %}{{ event.endDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ event.location }}</td>
+                <td>{{ event.objectif }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('event_show', { 'id': event.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('event_edit', { 'id': event.id }) }}">edit</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('particip', { 'id': event.id }) }}">conslt Partc</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('event_new') }}">Create a new event</a>
+        </li>
+    </ul>
+{% endblock %}

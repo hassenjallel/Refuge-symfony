@@ -1,0 +1,44 @@
+{% extends 'Admin_baseAsso.html.twig' %}
+
+{% block content %}
+    <h1>Sponsoring</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ sponsoring.id }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ sponsoring.email }}</td>
+            </tr>
+            <tr>
+                <th>Nomassosiation</th>
+                <td>{{ sponsoring.nomAssosiation }}</td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td>{{ sponsoring.password }}</td>
+            </tr>
+            <tr>
+                <th>Domaine</th>
+                <td>{{ sponsoring.domaine }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('sponsoring_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('sponsoring_edit', { 'id': sponsoring.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

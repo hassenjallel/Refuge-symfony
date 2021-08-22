@@ -1,0 +1,72 @@
+{% for sujet in sujets %}
+
+
+    <article class="blog_single">
+        <header class="entry-header">
+                                    <span class="post-category">
+                                        <a href="#"> {{ sujet.categorie}}</a>
+                                    </span>
+            <h2 class="entry-title">
+                <a href="single-blog.html">{{ sujet.titresujet }}</a>
+            </h2>
+            <span class="post-author">
+                                    <span class="post-by"> Posts by : </span> {{ sujet.user.username }} </span>
+            <span class="post-separator">|</span>
+            <span class="blog-post-date"><i class="fas fa-calendar-alt"></i>On {{ sujet.datesujet|date("m/d/Y") }} </span>
+        </header>
+        <div class="post-thumbnail img-full">
+            <a href="single-blog.html">
+                <img src="http:\\localhost\image\{{ sujet.image }}" alt="">
+            </a>
+        </div>
+        <div class="postinfo-wrapper">
+            <div class="post-info">
+                <div class="entry-summary">
+                    <p>{{ sujet.contenu }}</p>
+                    <a href="{{ path ( 'sujetByid',{'id':sujet.idsujetrc}) }}" class="form-button">Detail</a>
+                    {% if sujet.user.id==user %}
+                        <a href="{{ path ('updatesujet',{id:sujet.idsujetrc}) }}"  class="form-button" title="Modifier"><i style="font-size: 15px;color: white;"class="fa fa-file-text"></i></a>
+                        <a href="{{ path ('deletesujet',{id:sujet.idsujetrc}) }}"  class="form-button" title="Supprimer"><i style="font-size: 15px;color: white;"class="fa fa-minus-circle"></i></a>
+                    {% endif %}
+
+                    <div class="social-sharing">
+                        <div class="widget widget_socialsharing_widget">
+                            <ul class="blog-social-icons">
+                                <li>
+                                    <a target="_blank" title="Facebook" href="#" class="facebook social-icon">
+                                        <i class="fa fa-facebook"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a target="_blank" title="twitter" href="#" class="twitter social-icon">
+                                        <i class="fa fa-twitter"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a target="_blank" title="pinterest" href="#" class="pinterest social-icon">
+                                        <i class="fa fa-pinterest"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a target="_blank" title="linkedin" href="#" class="linkedin social-icon">
+                                        <i class="fa fa-linkedin"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% set i = 0  %}
+        {% for rep in reponse  %}
+            {% if sujet.idsujetrc==rep.idSujet %}
+                {%  set i = i+1 %}
+            {% endif %}
+        {% endfor %}
+        <!--start comment in post page -->
+        <a class="comment" href="#">{{ i }} comments</a>
+        <!--start comment in post page -->
+
+    </article>
+{% endfor %}

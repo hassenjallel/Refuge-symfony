@@ -1,0 +1,95 @@
+{% extends 'baseAsso.html.twig' %}
+{% block content %}
+    <div class="ui-theme-settings">
+        <button type="button" id="TooltipDemo" class="btn-open-options btn btn-warning">
+            <i class="fa fa-cog fa-w-16 fa-spin fa-2x"></i>
+        </button>
+        <div class="theme-settings__inner">
+            <div class="scrollbar-container">
+                <div class="theme-settings__options-wrapper">
+                    <h3 class="themeoptions-heading">evenet liste
+                    </h3>
+                    <div class="p-3">
+                        <ul class="list-group">
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <table class="table table-bordered table-striped table-hover">
+                                <thead>
+                                <tr>
+
+                                    <th>Nomevent</th>
+
+                                    <th>Nomassoc</th>
+
+
+
+                                    <th>Startdate</th>
+
+                                    <th>Enddate</th>
+
+                                    <th>Location</th>
+
+                                    <th>participer l'event</th>
+
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for event in events %}
+                                    <tr>
+
+                                        <td>{{ event.nomEvent }}</td>
+
+                                        <td>{{ event.nomAssoc }}</td>
+
+
+
+                                        <td>{% if event.startDate %}{{ event.startDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+
+                                        <td>{% if event.endDate %}{{ event.endDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+
+                                        <td>{{ event.location }}</td>
+                                        <td><a id="a" onclick="act()" href="{{ path('particip_new', { 'idevent': event.id ,'username':app.user.username}) }}">participer</a></td>
+
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </ul>
+                    </div>
+
+                    <div class="p-3">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    fachbipjoiengonegzngnztrognzognzrfy home !!
+    <a href="{{ path('show_asso') }} " class="nav-link">liste</a>
+<a href="{{ path("show_famille") }}" class="nav-link">liste2kjnj</a>
+
+
+    <a href="{{ path('sponsoring_new') }}">ajouter un sponsore</a>
+    <br>
+    <a href="{{ path('sponsoring_besoins_user') }}">consulter les besoins</a>
+    <br>
+
+
+{% endblock %}
+ {% block javascripts %}
+
+     <script type="text/javascript" src="{{ asset('back/assets/scripts/main.js') }}" ></script>
+     <script type='text/javascript' src="{{ asset('js/jquery.js') }}"></script>
+     <script type='text/javascript' src="{{ asset('js/jquery.collapsible.min.js') }}"></script>
+     <script type='text/javascript' src="{{ asset('js/swiper.min.js') }}"></script>
+     <script type='text/javascript' src="{{ asset('js/jquery.countdown.min.js') }}"></script>
+     <script type='text/javascript' src="{{ asset('js/circle-progress.min.js') }}"></script>
+     <script type='text/javascript' src="{{ asset('js/jquery.countTo.min.js') }}"></script>
+     <script type='text/javascript' src="{{ asset('js/jquery.barfiller.js') }}"></script>
+     <script type='text/javascript' src="{{ asset('js/custom.js') }}"></script>
+
+
+ {% endblock %}

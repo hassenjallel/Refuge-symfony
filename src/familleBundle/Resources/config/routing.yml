@@ -1,0 +1,24 @@
+clubexe:
+  path:     /index
+  defaults: { _controller: familleBundle:Default:index }
+message_fam:
+  path:     /message/{loginEnvoi}
+  defaults: { _controller: familleBundle:Default:listcontact }
+show_famille:
+  path:     /showasso
+  defaults: { _controller: familleBundle:Default:showAsso }
+ajax_searchUsers_fam:
+  path:     /searchUsers
+  defaults: { _controller: UserBundle:Default:search }
+profile_user_fam:
+  path:     /showprofile/{username}
+  defaults: { _controller: familleBundle:Default:profileUser }
+  ##messageaffiche:
+  ## path:     /message/{idMessage}/{idRecep}/{loginEnvoi}/{loginRecep}
+  ##defaults: { _controller: AssoBundle:Default:ajoutMessage }
+messageaffichefam:
+  path:     /message2/{idMessage}/{loginEnvoi}/{loginRecep}
+  defaults: { _controller: familleBundle:Default:ajoutMessage2 }
+messageaffich2e:
+  path:     /message2/{loginRecep}
+  defaults: { _controller: familleBundle:Default:ajoutMessage2 }

@@ -1,0 +1,154 @@
+{% extends 'baseRef.html.twig' %}
+{% block javascripts %}
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v6.0&appId=2875021462556487&autoLogAppEvents=1"></script>
+{% endblock %}
+{% block content %}
+    <div style="margin-left: 20%" class="breadcrumb-content breadcrumb-content-tow">
+        <ul>
+            <li><a href="{{ path('dispaly_all') }} " style="font-size:20px">Home</a></li>
+            <li class="active" style="font-size:15px">{{ sujet.user.username }}'s Blog</li>
+            <li><a href="{{ path('add_sujet') }}" style="font-size:20px">Ajouter Sujet</a></li>
+
+        </ul>
+    </div>
+    <div class="about-testimonial">
+    <div class="container">
+    <div class="row">
+    <div class="col-12 col-md-6 col-lg-5">
+        <div class="testimonial-cont">
+
+
+            <div class="entry-content">
+                <h1 style="color:#ff4800" >Title : <span style="color: grey">{{ sujet.titresujet }}</span></h1>
+                <p>{{ sujet.contenu }}.</p>
+
+            </div>
+
+
+            <div class="entry-footer d-flex flex-wrap align-items-center mt-5">
+                <img  class="profile-user-img img-fluid img-circle image-display" height="100px" width="250px" src="{{app.user.displayPhoto }}"   >
+
+                <h4>{{ sujet.user.username }}, <span>{{ sujet.categorie }}</span>,Le {{ sujet.datesujet|date("m/d/Y") }}</h4>
+            </div>
+
+        </div>
+        <div class="comments-area mt-80">
+            <h3>{{ comments|length }} comments</h3>
+
+
+            <ol class="commentlist">
+                {% for comment in comments %}
+
+
+
+                    <li>
+                        <div class="single-comment">
+                            <div class="comment-avatar img-full">
+                                <img style="width:55px;height:55px;" src="http:\\localhost\image\{{ app.user.displayPhoto }}" alt="">
+                            </div>
+                            <div class="comment-info" style="padding-top:5px;padding-bottom: 10px">
+                                <a style="color: grey;font-size: 30px" >{{ comment.user.username }}</a>
+                                {% set lik = 0 %}
+                                {% for like in likes %}
+                                    {% if like.idreponse==comment.idreponserc%}
+                                        {% set lik = lik+1 %}
+                                    {% endif %}
+                                {% endfor %}
+
+                                {% set test = false %}
+                                {% for like in likes %}
+                                    {% if like.iduser==user and like.idreponse==comment.idreponserc  %}
+                                        {% set test = true %}
+                                    {% endif %}
+                                {% endfor %}
+
+                                {% if test!=true %}
+
+                                    <div class="reply" >
+                                        <a href="{{ path('like',{'idrep':comment.idreponserc,'id':sujet.idsujetrc})}}" class="fa fa-heart  " style="color :#ff4800">{{ lik }}</a>
+                                        {% if comment.user.id==user  %}
+                                            <a href="{{ path('updaterep',{'id':comment.idreponserc}) }}" title="edit"><i style="font-size: 15px;color: #ff4800"class="fa fa-file-text" ></i></a>
+                                            <a href="{{ path('deleterep',{'id':comment.idreponserc,'idsujet':sujet.idsujetrc}) }}" title="Supprimer"><i style="font-size: 15px;color :#ff4800" class="fa fa-minus-circle"></i></a>
+
+                                        {% endif %}
+
+
+
+                                    </div>
+
+                                {% else %}
+                                    <div class="reply">
+                                        <a href="{{ path('dislike',{'idrep':comment.idreponserc,'id':sujet.idsujetrc}) }}" title="Dislike"> <i style="font-size: 10px;color: #ff4800" class="fa fa-heart  "></i>
+                                            {{ lik }}
+                                        </a>
+                                        {% if comment.user.id==user  %}
+
+                                            <a href="{{ path('updaterep',{'id':comment.idreponserc}) }}" title="Modifier"><i style="font-size: 15px;color: #ff4800;"class="fa fa-file-text"></i></a>
+
+                                            <a href="{{ path('deleterep',{'id':comment.idreponserc,'idsujet':sujet.idsujetrc}) }}" title="Supprimer"><i style="font-size: 15px;color: #ff4800;"class="fa fa-minus-circle"></i></a>
+                                        {% endif %}
+                                    </div>
+
+                                {% endif %}
+
+
+                            </div>
+
+                            <p >{{ comment.contenu }}</p>
+                            <span style="font-style: italic;font-size: 12px" >{{ comment.dateresponse|date("m/d/Y")  }}</span>
+
+
+                        </div>
+
+                    </li>
+                {% endfor %}
+
+            </ol>
+
+
+
+        </div>
+    </div>
+        <div class="col-12 col-md-6 offset-lg-2 col-lg-5" >
+            <div class="testimonial-cont">
+                <div class="entry-content">
+                    <h1 style="color:#ff4800" >Laissez votre commentaire !</h1>
+                </div>
+                <form id="form" action="{{ path('add_reposne',{id:sujet.idsujetrc}) }}" method="post">
+
+                <textarea required form="form" name="comment" placeholder="Veuillez saisir votre reponse" id="comment" cols="35" rows="5"></textarea>
+                    <ul style="list-style-type:none;margin-right: 500px">
+                        <li><button style="margin-left: 50%" id="submit" class="form-button ; btn gradient-bg mt-5" type="submit">Poster votre reponse </button></li>
+                       <li> <div style="margin-left: 70%" class="fb-share-button" data-href="https://www.facebook.com/groups/1229172083936276/" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.facebook.com%2Fgroups%2F1229172083936276%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div></li>
+
+                    </ul>
+
+                </form>
+
+
+            </div>
+            {% if testsapm==true %}
+
+                <div class="btn button button3" style="margin-left: 30px">
+                    <a href="{{ path('spam',{id:sujet.idsujetrc}) }}"  style="color: #ff4800" class="fa fa-warning">Signaler</a>
+
+                </div>
+            {% else %}
+                <div class="">
+                    <div  class="alert alert-danger" role="alert">
+                        Ce sujet a été signalé
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+
+
+    </div>
+    </div>
+    </div>
+
+
+
+
+
+{% endblock %}

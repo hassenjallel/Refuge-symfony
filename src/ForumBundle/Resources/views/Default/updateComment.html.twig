@@ -1,0 +1,36 @@
+{% extends 'baseRef.html.twig' %}
+
+{% block content %}
+
+    <div class="blog-area white-bg pt-0 pb-0 mb-50">
+        <div class="container" >
+            <div class="row">
+
+                <div class="comment-box mt-30 mb-40">
+                    <h3>Update your  Comment</h3>
+                    <form id="form" action="{{ path('majrep',{'id':comment.idreponserc,'idsujet':comment.idSujet}) }}" method="post">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="single-input">
+                                    <label>Comment*</label>
+                                    <span style="color: red;" id="grostitre2">Veuillez saisir vos information d'une manniere plus approprié ! LANGUAGE INNAPROPRIE</span>
+
+                                    <textarea  required form="form" name="contenu"  placeholder="Message" id="comment" cols="30" rows="5">{{ comment.contenu }}</textarea>
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-12">
+                                <div class="single-input">
+                                    <button id="submit" class="form-button" type="submit">Update  Comment</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

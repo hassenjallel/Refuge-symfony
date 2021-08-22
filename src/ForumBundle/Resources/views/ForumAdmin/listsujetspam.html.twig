@@ -1,0 +1,42 @@
+{% extends "Admin_baseRef.html.twig" %}
+
+
+
+{% block content %}
+
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-block">
+                <div class="card-title-block">
+                    <h3 class="title"> Liste sujet Spamé  </h3>
+                </div>
+                <section class="example">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>Titre de sujet </th>
+                            <th>Categorie </th>
+                            <th>Nom user </th>
+                            <th>Posté le </th>
+                            <th>Actions </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for sujet in sujets  %}
+                            <tr>
+                                <td>{{sujet.titresujet  }}</td>
+                                <td>{{ sujet.categorie }}</td>
+                                <td>{{ sujet.user.username }}</td>
+                                <td>{{ sujet.datesujet|date('y/m/d') }}</td>
+                                <td>
+                                    <a href="{{ path('deletesapm',{id:sujet.id}) }}"><button class="btn btn-danger">Supprimer</button></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </section>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'Admin_baseAsso.html.twig' %}
+
+{% block content %}
+
+    <h1>Sponsorings list</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>Nomassosiation</th>
+                <th>Password</th>
+                <th>Domaine</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for sponsoring in sponsorings %}
+            <tr>
+                <td><a href="{{ path('sponsoring_show', { 'id': sponsoring.id }) }}">{{ sponsoring.id }}</a></td>
+                <td>{{ sponsoring.email }}</td>
+                <td>{{ sponsoring.nomAssosiation }}</td>
+                <td>{{ sponsoring.password }}</td>
+                <td>{{ sponsoring.domaine }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('sponsoring_show', { 'id': sponsoring.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('sponsoring_edit', { 'id': sponsoring.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

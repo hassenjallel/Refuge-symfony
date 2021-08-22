@@ -1,0 +1,99 @@
+{% extends "Admin_baseRef.html.twig" %}
+
+
+
+{% block content %}
+
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-block">
+                <div class="card-title-block">
+                    <h3 class="title"> Inverse table </h3>
+                </div>
+                <div class="header-block header-block-search">
+                    <form  method="get">
+                        <i class="fa fa-search"></i>
+                        <input name="filter" type="text">
+                        <button type="submit" class="btn btn-default btn-sm">Filter Results</button>
+                    </form>
+                </div>
+
+
+
+                <section class="example">
+                    <table id="myTable" class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>Titre de sujet </th>
+                            <th>Image</th>
+                            <th>Categorie </th>
+                            <th>Nom user </th>
+                            <th>Posté le </th>
+                            <th>Actions </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for sujet in sujets  %}
+                            <tr>
+                                <td>{{sujet.titresujet  }}</td>
+                                <td>
+                                    <img   style="width: 100px;height: 100px"  src="{{sujet.displayPhoto2 }}"
+                                </td>
+                                <td>{{ sujet.categorie }}</td>
+                                <td>{{ sujet.user.username }}</td>
+                                <td>{{ sujet.datesujet|date('y/m/d') }}</td>
+                                <td>
+                                    <a href="{{ path('detailback',{id:sujet.idsujetrc}) }}"><button class="btn btn-primary">Detail</button></a>
+                                    <a href="{{ path('deleteback',{id:sujet.idsujetrc}) }}"><button class="btn btn-danger">Supprimer</button></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </section>
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+    <script  type="text/javascript">
+        console.log("ok");
+        $("document").ready(function () {
+            console.log("ok");
+            $("#categorie").change(function () {
+                console.log($(this).val());
+
+                $.ajax({
+
+                    url: '{{ path('search') }}',
+                    data: {
+                        categorie: $(this).val(),
+                        search: $("#search_input").val()
+
+                    },
+                    type: 'get',
+                    success: function (result, status) {
+                        $("#sujets").html(result)
+                    }
+                })
+            });
+            $("#search_input").keypress(function () {
+                console.log($(this).val());
+
+                $.ajax({
+                    url: '{{ path('search') }}',
+                    data: {
+                        search: $(this).val(),
+                        categorie: $('categorie').val()
+                    },
+                    type: 'get',
+                    success: function (result, status) {
+                        $("#sujets").html(result)
+                    }
+                })
+            });
+
+        })
+    </script>
+
+{% endblock %}

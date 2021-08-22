@@ -1,0 +1,143 @@
+{% extends 'baseRef.html.twig' %}
+{% block content %}
+
+    <div class="breadcrumb-tow mb-120">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb-title">
+                        <h1>Nos Sujets </h1>
+                    </div>
+                    <div class="breadcrumb-content breadcrumb-content-tow">
+                    <div class="breadcrumb-content breadcrumb-content-tow">
+                        <ul>
+                            <li><a href="{{ path('dispaly_all') }}">Home</a></li>
+                            <li class="active">Blog</li>
+                            <li><a href="{{ path('add_sujet') }}" style="font-size:20px">Ajouter Sujet</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <style>
+            .search-b {
+                width: 70px;
+                height: 30px;
+                margin-top: 10px;
+                border: 0;
+                margin-left: -5px;
+                font-size: 14px;
+                font-weight: 500;
+                background: #ff5a00;
+                color: #fff;
+                cursor: pointer;
+                outline: none;
+            }
+        </style>
+    <div class="col-lg-3" style="margin-left: 20%">
+        <div class="blog_sidebar">
+            <div class="row_products_side">
+                <div class="product_left_sidbar">
+                    <div class="product-filter  mb-35">
+
+
+                        <div class="search__sidbar">
+                            <div class="search-widget">
+                                <form class="flex flex-wrap align-items-center" method="get">
+                                    <input type="text" name="filter" placeholder="Search...">
+                                    <button type="submit" class="search-b">GO</button><br>
+                                    <select id="categorie" name="categorie" form="form">
+                                        <option value="all">All</option>
+
+                                        <option value="refuge">refuge</option>
+                                        <option value="famille">famille</option>
+                                        <option value="association">association</option>
+
+                                    </select>
+                                </form><!-- .flex -->
+
+                            </div><!-- .search-widget -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+    </div>
+    </div>
+    </div>
+
+
+
+    <hr>
+    {% for sujet in sujets %}
+
+    <div class="news-content" style="margin-left: 20%;display: inline-block"  >
+
+
+        <header class="entry-header d-flex flex-wrap col-md-6 align-items-center" >
+            <div class="header-elements" >
+
+                {% if sujet.image is defined and sujet.image is not null %}
+                    <img   style="width: 300px;height: 250px"  src="{{sujet.displayPhoto2 }}"   >
+
+                {% else %}
+                    <a href="#">
+                        <img alt="Pas d'image " alt="">
+                    </a>
+                {% endif %}
+                <div style="margin-top: 20px" class="posted-date">Le {{ sujet.datesujet|date("m/d/Y") }}</div>
+
+                <h2 class="entry-title"><a href="#">{{ sujet.titresujet }}</a></h2>
+
+                <div class="post-metas d-flex flex-wrap align-items-center">
+
+                    <span class="post-author">by <a href="#">{{ sujet.categorie}}</a></span>
+
+                    {% set i = 0  %}
+                    {% for rep in reponse  %}
+                        {% if sujet.idsujetrc==rep.idSujet %}
+                            {%  set i = i+1 %}
+                        {% endif %}
+                    {% endfor %}
+                    <!--start comment in post page -->
+                    <span class="post-comments"><a href="#">{{ i }} Comments</a></span>
+                    <!--start comment in post page -->
+
+                </div>
+            </div>
+
+            <div class="donate-icon">
+                <a href="#"><img src="images/donate-icon.png" alt=""></a>
+            </div>
+            <div class="entry-content">
+                <p>{{ sujet.contenu }}</p>
+
+            </div>
+
+
+        </header>
+        <footer class="entry-footer" style="margin-left: 15px;margin-top: 25px">
+            <a href="{{ path ( 'sujetByid',{'id':sujet.idsujetrc}) }}" class="btn gradient-bg">Detail</a>
+        </footer>
+
+
+    </div>
+    {% endfor %}
+    <hr>
+    <div class="news-content" style="margin-left: 40%">
+    <ul class="pagination d-flex flex-wrap align-items-center p-0 ">
+        {{ knp_pagination_render(sujets) }}
+    </ul>
+
+
+
+    </div>
+
+{% endblock %}

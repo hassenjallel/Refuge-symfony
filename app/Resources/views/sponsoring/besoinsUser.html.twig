@@ -1,0 +1,68 @@
+{% extends 'baseAsso.html.twig' %}
+
+{% block content %}
+    {#{{ dump(result) }}#}
+
+    <h1>besoins list</h1>
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+        <tr>
+
+            <th>nom produit</th>
+
+            <th>quantite dispo</th>
+
+            <th>nos besoins</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for besoin in besoins %}
+            <tr>
+                <td>{{ besoin.nomProduit }}</td>
+
+                <td>{{ besoin.quantiteDispo }}</td>
+
+                <td>{{ besoin.nosBesoins }}</td>
+                <td>
+                    <ul>
+
+
+
+                        <input id="{{ besoin.nomProduit }}" type="text" name="help">
+
+                            <a id="a" onclick="help('{{ besoin.nomProduit }}','{{ besoin.quantiteDispo }}','{{ besoin.nosBesoins  }}')">help</a>
+
+
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
+{% block javascripts %}
+    <script type="text/javascript">
+        function help(produit,quantite,besoins){
+                var str = $("#"+produit).val();
+
+                $.get( produit +"/" + str + "/"+quantite+"/"+besoins+"/help",
+                    function (data) {})
+                    .done(function (data) {
+                        alert("thx for helping us ");
+
+                        location.reload();
+                       // location.href = ;
+                        console.log(data);
+                    })
+                    .catch(function(error){
+                        console.log(error);
+                });
+        };
+        // var hr ="path (help,{nomProduit:"+besoin.nomProduit+",quantite : "+str+" })";
+        // $('#a').attr('href',hr );
+        //     });
+        // });
+    </script>
+{% endblock %}

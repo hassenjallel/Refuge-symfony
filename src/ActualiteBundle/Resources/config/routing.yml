@@ -1,0 +1,27 @@
+actualite_homepage:
+    path:     /
+    defaults: { _controller: ActualiteBundle:Default:index }
+create_annonce:
+    path:     /annonce/new
+    defaults: { _controller: ActualiteBundle:Default:newannonce}
+all:
+    path:     /annonce/all
+    defaults: { _controller: ActualiteBundle:Default:all }
+find_annonce:
+    path:     /annonce/find/{id}
+    defaults: { _controller: ActualiteBundle:Default:find}
+delete_annonce:
+    path:     /annonce/delete/{id}
+    defaults: { _controller: ActualiteBundle:Default:delete}
+edit_annonce:
+    path:     /annonce/edit/{id}
+    defaults: { _controller: ActualiteBundle:Default:edit}
+signup:
+    path:     /fos/new
+    defaults: { _controller: ActualiteBundle:fosmobile:new}
+signin:
+    path:     /fos/cnx
+    defaults: { _controller: ActualiteBundle:fosmobile:cnx}
+edit_user:
+    path:     /fos/edit
+    defaults: { _controller: ActualiteBundle:fosmobile:edit}
